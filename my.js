@@ -5,7 +5,8 @@ let inputItemBasePrice = document.getElementById("inputItemBasePrice")
 let buttonAdd = document.getElementById("buttonAdd")
 let spanItemNames = document.getElementById("itemNames")
 let spanSum = document.getElementById("sum")
-let ulitemList = document.getElementById("itemList")
+//let ulitemList = document.getElementById("itemList")
+let table = document.getElementById("table");
 
 //Változók
 let itemNameList = ["kenyér", "tej", "vaj"];
@@ -55,25 +56,48 @@ function OnButtonClicked() {
 }
 
 
+var torles = document.getElementById("buttonDelete")
+for (var i = 0; i < torles.length; i++) {
+    var torlesGomb = torles[i]
+    torlesGomb.addEventListener('click', torles)
+
+}
+
 //Üzleti logika
 //A kosár listája
 RenderList();
 
 function RenderList(){
-    ulitemList.innerText = "";
+    table.innerText = "";
+    var cim = document.createElement("tr");
+    var nev = document.createElement("th");
+    var dbszam = document.createElement("th");
+    var egysegar = document.createElement("th");
+    var osszar = document.createElement("th");
 
-    let mappedItemList = oTomb.map(function(o){
-        let ar = o.itemCount*o.itemBasePrice;
-        return `${o.itemName} - ${o.itemCount} - ${o.itemBasePrice} Ft (${ar}) Ft`
-    })
-    console.log(mappedItemList);
+    nev.innerText = "Termék neve";
+    dbszam.innerText = "Darabszám";
+    egysegar.innerText = "Egységár";
+    osszar.innerText = "Össz ár";
 
-    mappedItemList.forEach((element) => {
-       let newLi = document.createElement("li");
-        newLi.innerText = element;
-        ulitemList.appendChild(newLi);
+    cim.appendChild(nev);
+    cim.appendChild(dbszam);
+    cim.appendChild(egysegar);
+    cim.appendChild(osszar);
+    table.appendChild(cim);
+
+    // let mappedItemList = oTomb.map(function(o){
+    //     let ar = o.itemCount*o.itemBasePrice;
+    //     return `${o.itemName} - ${o.itemCount} - ${o.itemBasePrice} Ft (${ar}) Ft`
+    // })
+    // // console.log(mappedItemList);
+
+    // mappedItemList.forEach((element) => {
+    //    let newLi = document.createElement("li");
+    //     newLi.innerText = element;
+    //     ulitemList.appendChild(newLi);
         //console.log("Anyád");
-    });
+    //});
 
     //Összegek kezelése
     spanSum.innerText = GetSum();
